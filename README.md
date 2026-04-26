@@ -712,3 +712,7 @@ npm run dev
 | Supabase dashboard | https://supabase.com/dashboard |
 
 ---
+ ────────────────────────────────────
+-- Passwords are bcrypt hashed.
+-- testuser → password: test123
+-- devuser  → password: dev123

@@ -10,7 +10,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 // Importing pool.ts triggers the DB connection test on startup
-import './src/db/pool';
+import './db/pool';
 
 const app: Application = express();
 const PORT = Number(process.env.PORT) || 5000;
@@ -48,8 +48,8 @@ app.get('/health', (_req: Request, res: Response) => {
 // Uncomment each block as you complete the module.
 
 // Module 3 — Auth
-// import authRoutes from './routes/auth';
-// app.use('/api/auth', authRoutes);
+import authRoutes from './routes/auth';
+app.use('/api/auth', authRoutes);
 
 // Module 4 & 5 — Search
 // import searchRoutes from './routes/search';

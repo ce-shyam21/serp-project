@@ -24,7 +24,8 @@ app.use(
     origin: [
       'http://localhost:5173', // Vite dev server
       'https://serp-project.vercel.app', // Alternative
-      'https://serp-project-git-main-shyams-projects-1f2fc2d5.vercel.app/login', // Alternative
+      'https://serp-project-git-main-shyams-projects-1f2fc2d5.vercel.app', // Alternative
+      "https://serp-project-dev-test.vercel.app"
     ],
     credentials: true,
   })

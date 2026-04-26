@@ -4,6 +4,7 @@
 import { Router } from 'express';
 import { authenticateToken } from '../middleware/auth';
 import { singleSearch } from '../controllers/searchController';
+import { bulkSearch } from '../controllers/bulkController';  
 
 const router = Router();
 
@@ -11,6 +12,6 @@ const router = Router();
 router.post('/single', authenticateToken, singleSearch);
 
 // POST /api/search/bulk — will be wired in Module 5
-// router.post('/bulk', authenticateToken, bulkSearch);
+router.post('/bulk', authenticateToken, bulkSearch);
 
 export default router;

@@ -52,8 +52,8 @@ import authRoutes from './routes/auth';
 app.use('/api/auth', authRoutes);
 
 // Module 4 & 5 — Search
-// import searchRoutes from './routes/search';
-// app.use('/api/search', searchRoutes);
+import searchRoutes from './routes/search';
+app.use('/api/search', searchRoutes);
 
 // ── 404 Handler ─────────────────────────────────────────────────────────────
 // Catches any request that didn't match a route above

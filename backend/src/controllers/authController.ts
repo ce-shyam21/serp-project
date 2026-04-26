@@ -17,7 +17,7 @@ import {
 export async function register(
   req: AuthRequest,
   res: Response<ApiResponse>
-): Promise<void> {
+): Promise<void> {debugger;
   const { username, password } = req.body as RegisterBody;
 
   // Basic validation
@@ -61,7 +61,7 @@ export async function register(
 // ── POST /api/auth/login ─────────────────────────────────────────
 export async function login(
   req: AuthRequest,
-  res: Response<ApiResponse<{ token: string; user: { id: string; username: string } }>>
+  res: Response<any>
 ): Promise<void> {
   const { username, password } = req.body as LoginBody;
 
@@ -71,33 +71,38 @@ export async function login(
   }
 
   try {
-    // Find user
     const user = await queryOne<UserRow>(
       'SELECT * FROM users WHERE username = $1',
       [username]
     );
+
+    // ── DEBUG ──
+    console.log('5. User found:',   user ? 'YES' : 'NO');
+    console.log('6. Hash in DB:',   user?.password_hash);
+    // ── END DEBUG ──
 
     if (!user) {
       res.status(401).json({ success: false, error: 'Invalid credentials' });
       return;
     }
 
-    // Compare password
     const isMatch = await bcrypt.compare(password, user.password_hash);
+
+    // ── DEBUG ──
+    console.log('7. isMatch:',      isMatch);
+    // ── END DEBUG ──
 
     if (!isMatch) {
       res.status(401).json({ success: false, error: 'Invalid credentials' });
       return;
     }
 
-    // Sign JWT
     const token = jwt.sign(
       { userId: user.id, username: user.username },
       process.env.JWT_SECRET as string,
       { expiresIn: '7d' }
     );
 
-    // Update last_login timestamp
     await query(
       'UPDATE users SET last_login = NOW() WHERE id = $1',
       [user.id]

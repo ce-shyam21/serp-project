@@ -3,8 +3,8 @@
 // ─ Automatically sets the base URL to the backend
 // ─ Automatically attaches the JWT token to every request
 // ─ Handles 401 (token expired) by clearing auth and redirecting to login
-
-import axios, { AxiosInstance, InternalAxiosRequestConfig, AxiosResponse, AxiosError } from 'axios';
+import axios from 'axios';
+import type { AxiosInstance, InternalAxiosRequestConfig, AxiosResponse, AxiosError } from 'axios';
 
 const BASE_URL = import.meta.env.VITE_API_URL ?? 'http://localhost:5000/api';
 
